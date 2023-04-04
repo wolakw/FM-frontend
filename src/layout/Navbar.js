@@ -6,7 +6,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Full Stack Application
+            Football Manager
           </a>
           <button
             className="navbar-toggler"
