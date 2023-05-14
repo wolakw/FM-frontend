@@ -1,15 +1,53 @@
 import React, { useState } from 'react';
 
-export function MatchForm() {
+function Match() {
     const teams = ["Manchester United", "Liverpool", "Arsenal"];
     const [team1, setTeam1] = useState(teams[0]);
     const [team2, setTeam2] = useState(teams[1]);
     const [result, setResult] = useState("");
+    const [scorers, setScorers] = useState([]);
+    const [possession, setPossession] = useState("");
+    const [passes, setPasses] = useState("");
+    const [shots, setShots] = useState("");
 
     function playMatch() {
         const goalsTeam1 = Math.floor(Math.random() * 6);
         const goalsTeam2 = Math.floor(Math.random() * 6);
-        setResult(`Wynik meczu: ${goalsTeam1} : ${goalsTeam2}`);
+        setResult(`Wynik meczu: ${team1} ${goalsTeam1} : ${goalsTeam2} ${team2}`);
+        setScorers(generateScorers(goalsTeam1, goalsTeam2));
+        setPossession(generatePossession());
+        setPasses(generatePasses());
+        setShots(generateShots());
+    }
+
+    function generateScorers(goalsTeam1, goalsTeam2) {
+        const scorers = [];
+        for (let i = 0; i < goalsTeam1; i++) {
+            scorers.push({
+                team: team1,
+                player: `${team1} scorer ${i + 1}`
+            });
+        }
+        for (let i = 0; i < goalsTeam2; i++) {
+            scorers.push({
+                team: team2,
+                player: `${team2} scorer ${i + 1}`
+            });
+        }
+        return scorers;
+    }
+
+    function generatePossession() {
+        const possesion = Math.floor(Math.random() * 61) + 40;
+        return `${team1} ${possesion}% - ${team2} ${100-possesion}%`;
+    }
+
+    function generatePasses() {
+        return `${team1} ${Math.floor(Math.random() * 300) + 100} - ${team2} ${Math.floor(Math.random() * 300) + 100}`;
+    }
+
+    function generateShots() {
+        return `${team1} ${Math.floor(Math.random() * 15)} - ${team2} ${Math.floor(Math.random() * 15)}`;
     }
 
     function handleTeam1Change(event) {
@@ -37,12 +75,19 @@ export function MatchForm() {
                         <option key={team} value={team}>{team}</option>
                     ))}
                 </select>
-                <br /><br />
-                <button type="button" onClick={playMatch}>Zagraj mecz</button>
             </form>
-            <div>{result}</div>
+            <button onClick={playMatch}>Rozegraj mecz</button>
+            <p>{result}</p>
+            <ul>
+                {scorers.map((scorer) => (
+                    <li key={scorer.player}>{scorer.team} - {scorer.player}</li>
+                ))}
+            </ul>
+            <p>Posiadanie piłki: {possession}</p>
+            <p>Liczba podań: {passes}</p>
+            <p>Liczba strzałów: {shots}</p>
         </div>
     );
 }
 
-export default MatchForm;
+export default Match;
