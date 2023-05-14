@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import {Route, Routes} from "react-router-dom";
 import Login from "./pages/login/Login";
 import AddUser from "./users/AddUser";
+import Match from "./pages/match/Match";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/add-user" element={<AddUser />} />
+            <Route path="/match" element={<Match />} />
         </Routes>
 
     </div>
