@@ -26,6 +26,9 @@ export default function Navbar() {
           <Link to={"/add-user"}>
             <button className="btn btn-outline-light">Add User</button>
           </Link>
+          <Link to={"/start-training"}>
+            <button className="btn btn-outline-light">Start Training</button>
+          </Link>
 
         </div>
       </nav>
