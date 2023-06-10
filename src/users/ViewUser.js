@@ -42,6 +42,10 @@ export default function ViewUser() {
                                     <b>Email: </b>
                                     {user.email}
                                 </li>
+                                <li className="list-group-item">
+                                    <b>Club: </b>
+                                    {user.club?.name}
+                                </li>
                             </ul>
                         </div>
                     </div>
