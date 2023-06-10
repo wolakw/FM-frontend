@@ -13,8 +13,11 @@ import {
 import {useForm} from "@mantine/form";
 import {useMutation} from "@tanstack/react-query";
 import {api} from "../../api/ApiServices";
+import {Link, useNavigate} from "react-router-dom";
 
 export function NewUserForm() {
+    let navigate = useNavigate();
+
     const form = useForm({
         initialValues: {
             email: '',
@@ -29,6 +32,7 @@ export function NewUserForm() {
     });
     const submitHandle = (formValues)=>{
         newUserMutation.mutate(formValues);
+        navigate("/");
     }
     const newUserMutation = useMutation(api.newUser,{
         onSuccess:data => console.log(data)
@@ -46,6 +50,10 @@ export function NewUserForm() {
                 <Button type={"submit"} fullWidth mt="xl">
                     Add user
                 </Button>
+
+                <Link className={"btn btn-outline-danger"} style={{width: '100%', marginTop: 5}} to={"/"}>
+                    Cancel
+                </Link>
                 </form>
             </Paper>
         </Container>)
