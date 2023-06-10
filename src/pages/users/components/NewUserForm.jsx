@@ -12,7 +12,7 @@ import {
 } from '@mantine/core';
 import {useForm} from "@mantine/form";
 import {useMutation} from "@tanstack/react-query";
-import {api} from "../../api/ApiServices";
+import {api} from "../../../api/ApiServices";
 import {Link, useNavigate} from "react-router-dom";
 
 export function NewUserForm() {
@@ -32,7 +32,7 @@ export function NewUserForm() {
     });
     const submitHandle = (formValues)=>{
         newUserMutation.mutate(formValues);
-        navigate("/");
+        navigate("/users");
     }
     const newUserMutation = useMutation(api.newUser,{
         onSuccess:data => console.log(data)
@@ -51,7 +51,7 @@ export function NewUserForm() {
                     Add user
                 </Button>
 
-                <Link className={"btn btn-outline-danger"} style={{width: '100%', marginTop: 5}} to={"/"}>
+                <Link className={"btn btn-outline-danger"} style={{width: '100%', marginTop: 5}} to={"/users"}>
                     Cancel
                 </Link>
                 </form>
