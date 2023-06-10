@@ -8,6 +8,7 @@ import AddUser from "./users/AddUser";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import StartTraining from "./training/StartTraining";
 import IndividualTraining from "./training/IndividualTraining";
+import _IndividualTraining from "./training/_IndividualTraining";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/add-user" element={<AddUser />} />
             <Route path="/start-training" element={<StartTraining />} />
             <Route path="/individual-training" element={<IndividualTraining />} />
+            <Route path="/individual-training/:id" element={<_IndividualTraining />} />
         </Routes>
 
     </div>
