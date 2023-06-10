@@ -49,7 +49,7 @@ export function IndividualTrainingList() {
                             <td>{player.physicallity}</td>
 
                             <td>
-                                <button className="btn btn-primary mx-2">Train</button>
+                                <Link className="btn btn-primary mx-2" to={`/individual-training/${player.id}`}>Train</Link>
                             </td>
                         </tr>
                     ))}
