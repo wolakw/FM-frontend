@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 
 export default function Players() {
     const [players, setPlayers] = useState([]);
+    const [buyMessage, setBuyMessage] = useState("");
 
     const { id } = useParams();
 
@@ -22,9 +23,17 @@ export default function Players() {
         loadPlayers();
     };
 
+    const handleBuy = (playerId) => {
+        // W tym przykładzie tylko wyświetlamy komunikat
+        const player = players.find((player) => player.id === playerId);
+        setBuyMessage(`Player ${player.firstName} ${player.lastName} has been bought.`);
+    };
+
     return (
         <div className="container">
+            <h2>Transfer Market</h2>
             <div className="py-4">
+                {buyMessage && <div className="alert alert-success">{buyMessage}</div>}
                 <table className="table border shadow">
                     <thead>
                     <tr>
@@ -36,7 +45,6 @@ export default function Players() {
                         <th scope="col">Defending</th>
                         <th scope="col">Passing</th>
                         <th scope="col">Price</th>
-                        {/*<th scope="col">Club</th>*/}
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -45,7 +53,6 @@ export default function Players() {
                         if (player.taken === false) {
                             return (
                                 <tr key={index}>
-                                    {/*<th scope="row">{index + 1}</th>*/}
                                     <td>{player.id}</td>
                                     <td>{player.firstName}</td>
                                     <td>{player.lastName}</td>
@@ -54,19 +61,17 @@ export default function Players() {
                                     <td>{player.defending}</td>
                                     <td>{player.passing}</td>
                                     <td>{player.price.toLocaleString()}$</td>
-                                    {/*<td>{player.club?.name}</td>*/}
                                     <td>
-                                        <Link
+                                        <button
                                             className="btn btn-primary mx-2"
-                                            to={`/viewplayer/${player.id}`}
+                                            onClick={() => handleBuy(player.id)}
                                         >
                                             Buy
-                                        </Link>
+                                        </button>
                                     </td>
                                 </tr>
                             );
-                        }
-                        else {
+                        } else {
                             return null; // Ignoruj zawodników, których atrybut isTaken === true
                         }
                     })}

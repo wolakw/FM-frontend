@@ -1,15 +1,35 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from 'react-icons/ai';
 import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
+import axios from "axios";
 
 function Navbar() {
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
+
+    const [user, setUser] = useState({
+        name:"",
+        username:"",
+        email:"",
+        club:"",
+        currDate:""
+    })
+
+    const id = 1;
+
+    useEffect(()=> {
+        loadUser();
+    }, [])
+
+    const loadUser = async ()=>{
+        const result = await  axios.get(`http://localhost:8081/user/${id}`);
+        setUser(result.data);
+    }
 
     return (
         <>
@@ -18,7 +38,8 @@ function Navbar() {
                     <Link to='#' className='menu-bars'>
                         <FaIcons.FaBars onClick={showSidebar}/>
                     </Link>
-                    <Link style={{textDecoration: 'none'}} to="/" className="menu-bars">
+                    <h2 className="user-name">{user.club.name}</h2>
+                    <Link style={{textDecoration: 'none'}} to="/" className="menu-bars2">
                         <h2>Football Manager</h2>
                     </Link>
                 </div>
