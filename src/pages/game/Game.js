@@ -8,15 +8,14 @@ export default function GameDetails() {
         loadGame();
     }, []);
 
+    const gameId = 2; // ID meczu, który chcesz załadować
     const loadGame = async () => {
-        const gameId = 1; // ID meczu, który chcesz załadować
         const result = await axios.get(`http://localhost:8081/game/${gameId}`);
         setGame(result.data);
     };
 
     const simulateGame = async () => {
-        const gameId = 1; // ID meczu, który chcesz zasymulować
-        await axios.put(`http://localhost:8081/game/${gameId}`);
+        await axios.put(`http://localhost:8081/game/${gameId}/simulate`);
         loadGame();
     };
 
@@ -31,7 +30,7 @@ export default function GameDetails() {
                 <h4>Teams:</h4>
                 <p>Club 1: {game.club1.name}</p>
                 <p>Club 2: {game.club2.name}</p>
-                <p>Date: {game.gameDate.substring(0,10)}</p>
+                <p>Date: {game.gameDate?.substring(0,10)}</p>
             </div>
             <div className="py-4">
                 <h4>Match Statistics:</h4>

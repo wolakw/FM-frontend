@@ -58,7 +58,7 @@ export default function Players() {
 
     return (
         <div className="container">
-            <h2>Transfer Market | Your budget {user.club.budget}$</h2>
+            <h2>Transfer Market | Your budget {user.club.budget?.toLocaleString()}$</h2>
             <div className="py-4">
                 {buyMessage && <div className="alert alert-success">{buyMessage}</div>}
                 <table className="table border shadow">
