@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function GameDetails() {
     const [game, setGame] = useState(null);
+    const { id } = useParams(); // Pobranie ID meczu z parametrów URL
 
     useEffect(() => {
         loadGame();
-    }, []);
+    }, [id]); // Dodano gameId do zależności useEffect, aby ponownie załadować mecz po zmianie ID
 
-    const gameId = 2; // ID meczu, który chcesz załadować
     const loadGame = async () => {
-        const result = await axios.get(`http://localhost:8081/game/${gameId}`);
-        setGame(result.data);
+        try {
+            const result = await axios.get(`http://localhost:8081/game/${id}`);
+            setGame(result.data);
+        } catch (error) {
+            console.error("Error loading game:", error);
+        }
     };
 
     const simulateGame = async () => {
-        await axios.put(`http://localhost:8081/game/${gameId}/simulate`);
-        loadGame();
+        try {
+            await axios.put(`http://localhost:8081/game/${id}/simulate`);
+            loadGame();
+        } catch (error) {
+            console.error("Error simulating game:", error);
+        }
     };
 
     if (!game) {
@@ -30,7 +39,7 @@ export default function GameDetails() {
                 <h4>Teams:</h4>
                 <p>Club 1: {game.club1.name}</p>
                 <p>Club 2: {game.club2.name}</p>
-                <p>Date: {game.gameDate?.substring(0,10)}</p>
+                <p>Date: {game.gameDate?.substring(0, 10)}</p>
             </div>
             <div className="py-4">
                 <h4>Match Statistics:</h4>

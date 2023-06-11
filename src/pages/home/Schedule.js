@@ -2,17 +2,18 @@ import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import "./Schedule.css"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "./Schedule.css";
 
 export default function Schedule() {
     const locales = {
         "en-US": require("date-fns/locale/en-US"),
     };
+
     const localizer = dateFnsLocalizer({
         format,
         parse,
@@ -21,75 +22,47 @@ export default function Schedule() {
         locales,
     });
 
-    const events = [
-        {
-            title: "Big Meeting",
-            allDay: true,
-            start: new Date(2021, 6, 0),
-            end: new Date(2021, 6, 0),
-        },
-        {
-            title: "Vacation",
-            start: new Date(2021, 6, 7),
-            end: new Date(2021, 6, 10),
-        },
-        {
-            title: "Conference",
-            start: new Date(2021, 6, 20),
-            end: new Date(2021, 6, 23),
-        },
-    ];
+    const [allEvents, setAllEvents] = useState([]);
+    const navigate = useNavigate();
 
-    const [newEvent, setNewEvent] = useState({title: "", start: "", end: ""});
-    const [allEvents, setAllEvents] = useState(events);
+    useEffect(() => {
+        fetchEvents();
+    }, []);
 
-    function handleAddEvent() {
+    async function fetchEvents() {
+        try {
+            const response = await axios.get("http://localhost:8081/games"); // Wstaw odpowiedni endpoint do pobrania wydarzeń z bazy danych
+            const games = response.data;
 
-        for (let i = 0; i < allEvents.length; i++) {
+            const events = games.map((game) => ({
+                id: game.id, // Dodano ID meczu jako pole `id` w obiekcie wydarzenia
+                title: `${game.club1.name}`,
+                start: new Date(game.gameDate),
+                end: new Date(game.gameDate),
+            }));
 
-            const d1 = new Date(allEvents[i].start);
-            const d2 = new Date(newEvent.start);
-            const d3 = new Date(allEvents[i].end);
-            const d4 = new Date(newEvent.end);
-            /*
-                console.log(d1 <= d2);
-                console.log(d2 <= d3);
-                console.log(d1 <= d4);
-                console.log(d4 <= d3);
-                  */
-
-            if (
-                ((d1 <= d2) && (d2 <= d3)) || ((d1 <= d4) &&
-                    (d4 <= d3))
-            ) {
-                alert("CLASH");
-                break;
-            }
-
+            setAllEvents(events);
+        } catch (error) {
+            console.error("Error fetching events:", error);
         }
+    }
 
-
-        setAllEvents([...allEvents, newEvent]);
+    function handleEventClick(event) {
+        navigate(`/game/${event.id}`); // Przekierowanie do widoku symulacji meczu z odpowiednim ID meczu
     }
 
     return (
         <div className="Test">
             <h1>Calendar</h1>
-            <h2>Add New Event</h2>
-            <div className="Test">
-                <input type="text" placeholder="Add Title" style={{width: "20%", marginRight: "10px"}}
-                       value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}/>
-                <DatePicker placeholderText="Start Date" style={{marginRight: "10px"}} selected={newEvent.start}
-                            onChange={(start) => setNewEvent({...newEvent, start})}/>
-                <DatePicker placeholderText="End Date" selected={newEvent.end}
-                            onChange={(end) => setNewEvent({...newEvent, end})}/>
-                <button stlye={{marginTop: "10px"}} onClick={handleAddEvent}>
-                    Add Event
-                </button>
-            </div>
             <div className="cal">
-                <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end"
-                          style={{height: 500, margin: "50px",}}/>
+                <Calendar
+                    localizer={localizer}
+                    events={allEvents}
+                    startAccessor="start"
+                    endAccessor="end"
+                    style={{ height: 500, margin: "50px" }}
+                    onSelectEvent={handleEventClick} // Dodano obsługę kliknięcia na wydarzenie
+                />
             </div>
         </div>
     );

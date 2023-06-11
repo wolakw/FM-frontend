@@ -30,7 +30,7 @@ function App() {
             <Route path="/viewuser/:id" element={<ViewUser />} />
             <Route path="/players" element={<Players />} />
             <Route path="/team" element={<Team />} />
-            <Route path="/game" element={<Game />} />
+            <Route path="/game/:id" element={<Game />} />
         </Routes>
 
     </div>
