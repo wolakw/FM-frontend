@@ -35,7 +35,7 @@ export default function ClubPlayers() {
             setMessage("Player moved to XI successfully.");
         } else {
             setMessage("You already have 11 players in the First XI.");
-            setPlayers(club.players);
+            loadClub();
         }
     };
 

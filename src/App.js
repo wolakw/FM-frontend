@@ -11,6 +11,7 @@ import Navbar from "./layout/Navbar";
 import Users from "./pages/users/Users";
 import Players from "./pages/players/Players";
 import Team from "./pages/players/Team";
+import Game from "./pages/game/Game";
 import {Calender} from "./pages/home/Calender";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ function App() {
             <Route path="/match" element={<Match />} />
             <Route path="/players" element={<Players />} />
             <Route path="/team" element={<Team />} />
+            <Route path="/game" element={<Game />} />
         </Routes>
 
     </div>
