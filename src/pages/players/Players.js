@@ -6,8 +6,6 @@ export default function Players() {
     const [players, setPlayers] = useState([]);
     const [buyMessage, setBuyMessage] = useState("");
 
-    const { id } = useParams();
-
     useEffect(() => {
         loadPlayers();
     }, []);
@@ -18,20 +16,49 @@ export default function Players() {
         setPlayers(result.data);
     };
 
-    const deletePlayer = async (id) => {
-        await axios.delete(`http://localhost:8081/player/${id}`);
-        loadPlayers();
+    const handleBuy = (playerId) => {
+        const player = players.find((player) => player.id === playerId);
+        if (player.price > user.club.budget) {
+            setBuyMessage("Not enough budget to buy this player.");
+        } else {
+            buyPlayer(playerId);
+        }
     };
 
-    const handleBuy = (playerId) => {
-        // W tym przykładzie tylko wyświetlamy komunikat
-        const player = players.find((player) => player.id === playerId);
-        setBuyMessage(`Player ${player.firstName} ${player.lastName} has been bought.`);
+    const buyPlayer = async (playerId) => {
+        try {
+            await axios.put(`http://localhost:8081/players/${playerId}/buy`);
+            setBuyMessage("Player has been bought.");
+            loadPlayers();
+            loadUser();
+        } catch (error) {
+            console.log(error);
+            setBuyMessage("Failed to buy the player.");
+        }
     };
+
+    const [user, setUser] = useState({
+        name:"",
+        username:"",
+        email:"",
+        club:"",
+        currDate:""
+    })
+
+    const id = 1;
+
+    useEffect(()=> {
+        loadUser();
+    }, [])
+
+    const loadUser = async ()=>{
+        const result = await  axios.get(`http://localhost:8081/user/${id}`);
+        setUser(result.data);
+    }
 
     return (
         <div className="container">
-            <h2>Transfer Market</h2>
+            <h2>Transfer Market | Your budget {user.club.budget}$</h2>
             <div className="py-4">
                 {buyMessage && <div className="alert alert-success">{buyMessage}</div>}
                 <table className="table border shadow">
@@ -77,10 +104,6 @@ export default function Players() {
                     })}
                     </tbody>
                 </table>
-
-                <Link to={"/add-player"}>
-                    <button className="btn btn-primary mx-2">Add Player</button>
-                </Link>
             </div>
         </div>
     );
