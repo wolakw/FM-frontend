@@ -18,7 +18,7 @@ function Navbar() {
                     <Link to='#' className='menu-bars'>
                         <FaIcons.FaBars onClick={showSidebar}/>
                     </Link>
-                    <Link to="/" className="menu-bars">
+                    <Link style={{textDecoration: 'none'}} to="/" className="menu-bars">
                         <h2>Football Manager</h2>
                     </Link>
                 </div>

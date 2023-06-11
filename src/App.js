@@ -1,6 +1,5 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Home from "./pages/Home";
 import {Route, Router, Routes} from "react-router-dom";
 import Login from "./pages/login/Login";
 import AddUser from "./pages/users/AddUser";
@@ -10,6 +9,9 @@ import EditUser from "./pages/users/EditUser";
 import ViewUser from "./pages/users/ViewUser";
 import Navbar from "./layout/Navbar";
 import Users from "./pages/users/Users";
+import Players from "./pages/players/Players";
+import Team from "./pages/players/Team";
+import {Calender} from "./pages/home/Calender";
 
 const queryClient = new QueryClient();
 
@@ -20,12 +22,14 @@ function App() {
       <Navbar />
         <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Calender />} />
             <Route path="/users" element={<Users />} />
             <Route path="/add-user" element={<AddUser />} />
             <Route path="/edituser/:id" element={<EditUser />} />
             <Route path="/viewuser/:id" element={<ViewUser />} />
             <Route path="/match" element={<Match />} />
+            <Route path="/players" element={<Players />} />
+            <Route path="/team" element={<Team />} />
         </Routes>
 
     </div>

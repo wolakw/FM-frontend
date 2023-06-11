@@ -27,7 +27,7 @@ export default function Users() {
                 <table className="table border shadow">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
@@ -38,7 +38,8 @@ export default function Users() {
                     <tbody>
                     {users.map((user, index) => (
                         <tr key={index}>
-                            <th scope="row">{index + 1}</th>
+                            {/*<th scope="row">{index + 1}</th>*/}
+                            <td>{user.id}</td>
                             <td>{user.name}</td>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
