@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 export default function ClubPlayers() {
     const [club, setClub] = useState(null);
     const [players, setPlayers] = useState([]);
+    const [message, setMessage] = useState("");
 
     const  id  = 1;
 
@@ -19,9 +20,29 @@ export default function ClubPlayers() {
         setPlayers(result.data.players);
     };
 
-    const deletePlayer = async (id) => {
-        await axios.delete(`http://localhost:8081/player/${id}`);
+    const movePlayerToXI = async (playerId) => {
+        const updatedPlayers = players.map((player) => {
+            if (player.id === playerId) {
+                player.firstXI = true;
+            }
+            return player;
+        });
+
+        const countFirstXI = updatedPlayers.filter((player) => player.firstXI === true).length;
+        if (countFirstXI <= 11) {
+            await axios.put(`http://localhost:8081/player/${playerId}/moveToXI`);
+            setPlayers(updatedPlayers);
+            setMessage("Player moved to XI successfully.");
+        } else {
+            setMessage("You already have 11 players in the First XI.");
+            setPlayers(club.players);
+        }
+    };
+
+    const removePlayerFromXI = async (playerId) => {
+        await axios.put(`http://localhost:8081/players/${playerId}/remove-from-xi`);
         loadClub();
+        setMessage("Player has been removed from the first XI.");
     };
 
     if (!club) {
@@ -32,6 +53,7 @@ export default function ClubPlayers() {
         <div className="container">
             <h2>First XI of {club.name}</h2>
             <div className="py-4">
+                {message && <div className="alert alert-success">{message}</div>}
                 <table className="table border shadow">
                     <thead>
                     <tr>
@@ -62,7 +84,7 @@ export default function ClubPlayers() {
                                     <td>
                                         <button
                                             className="btn btn-primary mx-2"
-
+                                            onClick={() => removePlayerFromXI(player.id)}
                                         >
                                             Remove
                                         </button>
@@ -109,7 +131,7 @@ export default function ClubPlayers() {
                                     <td>
                                         <button
                                             className="btn btn-primary mx-2"
-
+                                            onClick={() => movePlayerToXI(player.id)}
                                         >
                                             Move to XI
                                         </button>
