@@ -12,26 +12,7 @@ function Navbar() {
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
-
-    const [user, setUser] = useState({
-        name:"",
-        username:"",
-        email:"",
-        club:"",
-        currDate:""
-    })
-
-    const id = 1;
     const userData = useAuth();
-
-    useEffect(()=> {
-        loadUser();
-    }, [])
-
-    const loadUser = async ()=>{
-        const result = await  axios.get(`http://localhost:8081/user/${id}`);
-        setUser(result.data);
-    }
 
     return (
         <>
@@ -40,7 +21,7 @@ function Navbar() {
                     <Link to='#' className='menu-bars'>
                         <FaIcons.FaBars onClick={showSidebar}/>
                     </Link>
-                    <h2 className="user-name">{user.club?.name}</h2>
+                    <h2 className="user-name">{userData?.user?.club.name}</h2>
                     <Link style={{textDecoration: 'none'}} to="/" className="menu-bars2">
                         <h2>Football Manager</h2>
                     </Link>
