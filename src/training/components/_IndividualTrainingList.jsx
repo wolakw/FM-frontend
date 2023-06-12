@@ -20,9 +20,9 @@ export function _IndividualTrainingList() {
     return (
         <Container size={420} my={40}>
             <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-                <form onSubmit={(e) => onSubmit(e,'pace')}>
+                <form onSubmit={(e) => onSubmit(e,'speed')}>
                     <Button type={"submit"} fullWidth mt="xl">
-                        Pace Training
+                        Train Speed
                     </Button>
                 </form>
                 <form onSubmit={(e) => onSubmit(e,'shooting')}>
@@ -35,19 +35,9 @@ export function _IndividualTrainingList() {
                         Train Passing
                     </Button>
                 </form>
-                <form onSubmit={(e) => onSubmit(e,'dribbling')}>
-                    <Button type={"submit"} fullWidth mt="xl">
-                        Train Dribbling
-                    </Button>
-                </form>
                 <form onSubmit={(e) => onSubmit(e,'defending')}>
                     <Button type={"submit"} fullWidth mt="xl">
                         Train Defending
-                    </Button>
-                </form>
-                <form onSubmit={(e) => onSubmit(e,'physicality')}>
-                    <Button type={"submit"} fullWidth mt="xl">
-                        Train Physicality
                     </Button>
                 </form>
             </Paper>

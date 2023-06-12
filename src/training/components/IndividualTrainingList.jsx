@@ -4,15 +4,21 @@ import axios from "axios";
 
 export function IndividualTrainingList() {
 
+    const [club, setClub] = useState(null);
     const [players, setPlayers] = useState([]);
+    const [message, setMessage] = useState("");
+
+    const  id  = 1;
 
     useEffect(() => {
-        loadPlayers();
+        loadClub();
     }, []);
 
-    const loadPlayers = async () => {
-        const result = await axios.get("http://localhost:8081/players");
-        setPlayers(result.data);
+    const loadClub = async () => {
+        const result = await axios.get(`http://localhost:8081/club/${id}`);
+        console.log(result.data);
+        setClub(result.data);
+        setPlayers(result.data.players);
     };
 
     return (
@@ -24,12 +30,10 @@ export function IndividualTrainingList() {
                         <th scope="col">#</th>
                         <th scope="col">Fname</th>
                         <th scope="col">Lname</th>
-                        <th scope="col">Pace</th>
+                        <th scope="col">Speed</th>
                         <th scope="col">Shooting</th>
                         <th scope="col">Passing</th>
-                        <th scope="col">Dribbling</th>
                         <th scope="col">Defending</th>
-                        <th scope="col">Phisicallity</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -39,14 +43,12 @@ export function IndividualTrainingList() {
                             <th scope="row" key={index}>
                                 {index + 1}
                             </th>
-                            <td>{player.fname}</td>
-                            <td>{player.lname}</td>
-                            <td>{player.pace}</td>
+                            <td>{player.firstName}</td>
+                            <td>{player.lastName}</td>
+                            <td>{player.speed}</td>
                             <td>{player.shooting}</td>
                             <td>{player.passing}</td>
-                            <td>{player.dribbling}</td>
                             <td>{player.defending}</td>
-                            <td>{player.physicallity}</td>
 
                             <td>
                                 <Link className="btn btn-primary mx-2" to={`/individual-training/${player.id}`}>Train</Link>

@@ -12,6 +12,10 @@ import Users from "./pages/users/Users";
 import Players from "./pages/players/Players";
 import Team from "./pages/players/Team";
 import {Calender} from "./pages/home/Calender";
+import StartTraining from "./training/StartTraining";
+import IndividualTraining from "./training/IndividualTraining";
+import _IndividualTraining from "./training/_IndividualTraining";
+import TeamTraining from "./training/TeamTraining";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +34,10 @@ function App() {
             <Route path="/match" element={<Match />} />
             <Route path="/players" element={<Players />} />
             <Route path="/team" element={<Team />} />
+            <Route path="/start-training" element={<StartTraining />} />
+            <Route path="/individual-training" element={<IndividualTraining />} />
+            <Route path="/individual-training/:id" element={<_IndividualTraining />} />
+            <Route path="/team-training" element={<TeamTraining />} />
         </Routes>
 
     </div>
