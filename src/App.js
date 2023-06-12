@@ -1,6 +1,6 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import {Route, Router, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Login from "./pages/login/Login";
 import AddUser from "./pages/users/AddUser";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
@@ -13,20 +13,32 @@ import Team from "./pages/Team/Team";
 import Game from "./pages/game/Game";
 import Schedule from "./pages/home/Schedule";
 import ClubsTable from "./pages/Table/ClubsTable";
-import React from "react";
+import React, {useEffect} from "react";
 import GamesClub from "./pages/game/GamesClub";
 import ViewGame from "./pages/game/ViewGame";
+import GuestOutlet from "./router/GuestRouting";
+import Register from "./pages/login/Register";
+import {useAuth} from "./context/AuthContext";
+import UserOutlet from "./router/UserRouting";
 
 
 const queryClient = new QueryClient();
 
 function App() {
+    const {me} = useAuth();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            me(token);
+        }
+    }, []);
   return (
       <QueryClientProvider client={queryClient}>
     <div className="App">
       <Navbar />
         <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<UserOutlet/>}>
             <Route path="/" element={<Schedule />} />
             <Route path="/users" element={<Users />} />
             <Route path="/add-user" element={<AddUser />} />
@@ -38,6 +50,12 @@ function App() {
             <Route path="/games" element={<GamesClub />} />
             <Route path="/game/:id" element={<Game />} />
             <Route path="/viewgame/:id" element={<ViewGame />} />
+            </Route>
+
+            <Route path="/" element={<GuestOutlet/>}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+            </Route>
         </Routes>
 
     </div>
