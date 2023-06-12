@@ -4,7 +4,7 @@ import Navbar from "./layout/Navbar";
 import Home from "./pages/Home";
 import {Route, Routes} from "react-router-dom";
 import Login from "./pages/login/Login";
-import AddUser from "./users/AddUser";
+import AddUser from "./pages/users/AddUser";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {useEffect} from "react";
 import {useAuth} from "./context/AuthContext";
@@ -12,6 +12,17 @@ import Register from "./pages/login/Register";
 import EventHandler from "bootstrap/js/src/dom/event-handler";
 import UserOutlet from "./router/UserRouting";
 import GuestOutlet from "./router/GuestRouting";
+import Users from "./pages/users/Users";
+import EditUser from "./pages/users/EditUser";
+import ViewUser from "./pages/users/ViewUser";
+import Players from "./pages/market/Players";
+import Team from "./pages/Team/Team"
+import ClubsTable from "./pages/Table/ClubsTable"
+import GamesClub from "./pages/game/GamesClub"
+import Game from "./pages/game/Game"
+import ViewGame from "./pages/game/ViewGame"
+import Schedule from "./pages/home/Schedule";
+
 
 const queryClient = new QueryClient();
 
@@ -30,8 +41,18 @@ function App() {
       <Navbar />
         <Routes>
             <Route path="/" element={<UserOutlet/>}>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Schedule />} />
                 <Route path="/add-user" element={<AddUser />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/add-user" element={<AddUser />} />
+                <Route path="/edituser/:id" element={<EditUser />} />
+                <Route path="/viewuser/:id" element={<ViewUser />} />
+                <Route path="/players" element={<Players />} />
+                <Route path="/team" element={<Team />} />
+                <Route path="/table" element={<ClubsTable />} />
+                <Route path="/games" element={<GamesClub />} />
+                <Route path="/game/:id" element={<Game />} />
+                <Route path="/viewgame/:id" element={<ViewGame />} />
             </Route>
             <Route path="/" element={<GuestOutlet/>}>
             <Route path="/login" element={<Login />} />

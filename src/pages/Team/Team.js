@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import {useAuth} from "../../context/AuthContext";
 
 export default function ClubPlayers() {
     const [club, setClub] = useState(null);
@@ -8,6 +9,7 @@ export default function ClubPlayers() {
     const [message, setMessage] = useState("");
 
     const  id  = 1;
+
 
     useEffect(() => {
         loadClub();
@@ -52,12 +54,14 @@ export default function ClubPlayers() {
     };
 
     if (!club) {
-        return <div>Loading club data...</div>;
+        return <div>Loading club data...
+        </div>;
     }
 
     return (
         <div className="container">
             <h2>First XI of {club.name} | Your team's rating is {club.grade}/100</h2>
+
             <div className="py-4">
                 {message && <div className="alert alert-success">{message}</div>}
                 <table className="table border shadow">
