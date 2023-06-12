@@ -51,7 +51,7 @@ export default function ClubPlayers() {
 
     return (
         <div className="container">
-            <h2>First XI of {club.name}</h2>
+            <h2>First XI of {club.name} | Your team's rating is {club.grade}/100</h2>
             <div className="py-4">
                 {message && <div className="alert alert-success">{message}</div>}
                 <table className="table border shadow">

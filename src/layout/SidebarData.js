@@ -11,9 +11,21 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Users',
-        path: '/users',
+        title: 'Team',
+        path: '/team',
         icon: <IoIcons.IoMdPeople />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Games',
+        path: '/games',
+        icon: <IoIcons.IoIosFootball/>,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Table',
+        path: '/table',
+        icon: <FaIcons.FaTable />,
         cName: 'nav-text'
     },
     {
@@ -23,21 +35,9 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Team',
-        path: '/team',
+        title: 'Users',
+        path: '/users',
         icon: <IoIcons.IoMdPeople />,
-        cName: 'nav-text'
-    },
-    {
-        title: 'game',
-        path: '/game',
-        icon: <FaIcons.FaEnvelopeOpenText />,
-        cName: 'nav-text'
-    },
-    {
-        title: 'Support',
-        path: '/support',
-        icon: <IoIcons.IoMdHelpCircle />,
         cName: 'nav-text'
     }
 ];
