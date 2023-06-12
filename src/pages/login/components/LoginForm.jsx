@@ -10,8 +10,32 @@ import {
     Group,
     Button,
 } from '@mantine/core';
+import {useForm} from "@mantine/form";
+import {useMutation} from "@tanstack/react-query";
+import {api} from "../../../api/ApiServices";
+import {useAuth} from "../../../context/AuthContext";
+import data from "bootstrap/js/src/dom/data";
+import {useNavigate} from "react-router-dom";
 
 export function LoginForm() {
+    const navigate = useNavigate();
+    const {login}=useAuth();
+    const form = useForm({
+        initialValues: {
+            email: '',
+            password: ''
+        }
+
+
+    });
+    const loginMutation = useMutation(api.login,{
+        onSuccess:(e)=>{login(e.data.token);
+            navigate("/");
+        }
+    })
+    const handleSubmit = data=>{
+        loginMutation.mutate(data)
+    }
     return (
         <Container size={420} my={40}>
             <Title
@@ -28,17 +52,19 @@ export function LoginForm() {
             </Text>
 
             <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-                <TextInput label="Email" placeholder="you@mantine.dev" required />
-                <PasswordInput label="Password" placeholder="Your password" required mt="md" />
+                <form onSubmit={form.onSubmit(handleSubmit)}>
+                <TextInput {...form.getInputProps('email')} label="Email" placeholder="you@mantine.dev" required />
+                <PasswordInput {...form.getInputProps('password')} label="Password" placeholder="Your password" required mt="md" />
                 <Group position="apart" mt="lg">
                     <Checkbox label="Remember me" />
                     <Anchor component="button" size="sm">
                         Forgot password?
                     </Anchor>
                 </Group>
-                <Button fullWidth mt="xl">
+                <Button loading={loginMutation.isLoading} type={"submit"} fullWidth mt="xl">
                     Sign in
                 </Button>
+                </form>
             </Paper>
         </Container>)
 

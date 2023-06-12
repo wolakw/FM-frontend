@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {MantineProvider} from "@mantine/core";
 import {BrowserRouter} from "react-router-dom";
+import {UserProvider} from "./context/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
         <MantineProvider withGlobalStyles withNormalizeCSS>
-            <App/>
+            <UserProvider>
+                <App/>
+            </UserProvider>
         </MantineProvider>
         </BrowserRouter>
     </React.StrictMode>
