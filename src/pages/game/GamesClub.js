@@ -13,7 +13,10 @@ export default function Games() {
 
     const loadGames = async () => {
         const result = await axios.get("http://localhost:8081/games");
-        setGames(result.data);
+        const filteredGames = result.data.filter(
+            (game) => game.club1.id === 1 && game.played
+        );
+        setGames(filteredGames);
     };
 
     return (
@@ -34,10 +37,12 @@ export default function Games() {
                     {games.map((game) => (
                         <tr key={game.id}>
                             <td>{game.id}</td>
-                            <td>{game.gameDate?.substring(0,10)}</td>
+                            <td>{game.gameDate?.substring(0, 10)}</td>
                             <td>{game.club1.name}</td>
                             <td>{game.club2.name}</td>
-                            <td>{game.goalsClub1} - {game.goalsClub2}</td>
+                            <td>
+                                {game.goalsClub1} - {game.goalsClub2}
+                            </td>
                             <td>
                                 <Link
                                     className="btn btn-primary mx-2"
