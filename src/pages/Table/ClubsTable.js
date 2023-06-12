@@ -19,6 +19,7 @@ export default function Clubs() {
 
     return (
         <div className="container">
+            <h1>League table</h1>
             <div className="py-4">
                 <table className="table border shadow">
                     <thead>
