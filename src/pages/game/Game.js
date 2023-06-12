@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 export default function GameDetails() {
     const [game, setGame] = useState(null);
@@ -20,11 +20,14 @@ export default function GameDetails() {
     };
 
     const simulateGame = async () => {
-        try {
-            await axios.put(`http://localhost:8081/game/${id}/simulate`);
-            loadGame();
-        } catch (error) {
-            console.error("Error simulating game:", error);
+        if (!game.played) {
+            // Sprawdzenie czy gra już nie została zasymulowana
+            try {
+                await axios.put(`http://localhost:8081/game/${id}/simulate`);
+                loadGame();
+            } catch (error) {
+                console.error("Error simulating game:", error);
+            }
         }
     };
 
@@ -52,9 +55,16 @@ export default function GameDetails() {
                 <p>Passes Club 1: {game.passesClub1}</p>
                 <p>Passes Club 2: {game.passesClub2}</p>
             </div>
-            <button className="btn btn-primary" onClick={simulateGame}>
-                Simulate Game
+            <button
+                className="btn btn-primary"
+                onClick={simulateGame}
+                disabled={game.played} // Dodanie disabled do przycisku w przypadku, gdy gra została już zasymulowana
+            >
+                {game.played ? "Game Simulated" : "Simulate Game"}
             </button>
+            <Link to="/" className="btn btn-primary mt-3">
+                Back
+            </Link>
         </div>
     );
 }
