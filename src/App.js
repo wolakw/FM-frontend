@@ -12,6 +12,8 @@ import Players from "./pages/market/Players";
 import Team from "./pages/Team/Team";
 import Game from "./pages/game/Game";
 import Schedule from "./pages/home/Schedule";
+import ClubsTable from "./pages/Table/ClubsTable";
+import React from "react";
 
 
 const queryClient = new QueryClient();
@@ -30,6 +32,7 @@ function App() {
             <Route path="/viewuser/:id" element={<ViewUser />} />
             <Route path="/players" element={<Players />} />
             <Route path="/team" element={<Team />} />
+            <Route path="/table" element={<ClubsTable />} />
             <Route path="/game/:id" element={<Game />} />
         </Routes>
 
