@@ -13,7 +13,8 @@ export default function Clubs() {
 
     const loadClubs = async () => {
         const result = await axios.get("http://localhost:8081/clubs");
-        setClubs(result.data);
+        const sortedClubs = result.data.sort((a, b) => b.points - a.points);
+        setClubs(sortedClubs);
     };
 
     return (
@@ -22,7 +23,7 @@ export default function Clubs() {
                 <table className="table border shadow">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">Place</th>
                         <th scope="col">Name</th>
                         <th scope="col">Matches Played</th>
                         <th scope="col">Matches Won</th>
@@ -34,7 +35,7 @@ export default function Clubs() {
                     <tbody>
                     {clubs.map((club, index) => (
                         <tr key={index}>
-                            <td>{club.id}</td>
+                            <td>{index + 1}</td>
                             <td>{club.name}</td>
                             <td>{club.matchesPlayed}</td>
                             <td>{club.matchesWon}</td>
