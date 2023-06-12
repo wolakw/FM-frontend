@@ -27,7 +27,8 @@ import Schedule from "./pages/home/Schedule";
 const queryClient = new QueryClient();
 
 function App() {
-    const {me} = useAuth();
+    const {me,user} = useAuth();
+    console.log(user)
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -38,10 +39,11 @@ function App() {
   return (
       <QueryClientProvider client={queryClient}>
     <div className="App">
-      <Navbar />
+      {/*<Navbar />*/}
         <Routes>
             <Route path="/" element={<UserOutlet/>}>
-            <Route path="/" element={<Schedule />} />
+
+                <Route path="/" element={<Schedule />} />
                 <Route path="/add-user" element={<AddUser />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/add-user" element={<AddUser />} />

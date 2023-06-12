@@ -9,6 +9,7 @@ export default function ClubPlayers() {
     const [message, setMessage] = useState("");
 
     const  id  = 1;
+    const{user} = useAuth();
 
 
     useEffect(() => {
@@ -55,6 +56,7 @@ export default function ClubPlayers() {
 
     if (!club) {
         return <div>Loading club data...
+            <h2>{user?.id}</h2>
         </div>;
     }
 

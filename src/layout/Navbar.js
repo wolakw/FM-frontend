@@ -6,6 +6,7 @@ import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 import axios from "axios";
+import {useAuth} from "../context/AuthContext";
 
 function Navbar() {
     const [sidebar, setSidebar] = useState(false);
@@ -21,6 +22,7 @@ function Navbar() {
     })
 
     const id = 1;
+    const userData = useAuth();
 
     useEffect(()=> {
         loadUser();
@@ -50,6 +52,11 @@ function Navbar() {
                                 <AiIcons.AiOutlineClose/>
                             </Link>
                         </li>
+                        {(userData?.user?.authorities[0].authority==='ADMIN' && <li className={'nav-text'}>
+                        <Link to='#' >
+                            <AiIcons.AiOutlineClose/>
+                        </Link>
+                    </li>)}
                         {SidebarData.map((item, index) => {
                             return (
                                 <li key={index} className={item.cName}>
