@@ -34,9 +34,13 @@ export default function Schedule() {
             const response = await axios.get("http://localhost:8081/games"); // Wstaw odpowiedni endpoint do pobrania wydarzeń z bazy danych
             const games = response.data;
 
-            const events = games.map((game) => ({
+            const filteredGames = games.filter(
+                (game) => (game.club1.id === 1 || game.club2.id === 1) && !game.played
+            );
+
+            const events = filteredGames.map((game) => ({
                 id: game.id, // Dodano ID meczu jako pole `id` w obiekcie wydarzenia
-                title: `${game.club1.name}`,
+                title: `${game.club1.name} - ${game.club2.name}`,
                 start: new Date(game.gameDate),
                 end: new Date(game.gameDate),
             }));
