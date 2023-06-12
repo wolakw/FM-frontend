@@ -8,6 +8,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Schedule.css";
+import {useAuth} from "../../context/AuthContext";
 
 export default function Schedule() {
     const locales = {
@@ -29,13 +30,14 @@ export default function Schedule() {
         fetchEvents();
     }, []);
 
+    const{user} = useAuth();
     async function fetchEvents() {
         try {
             const response = await axios.get("http://localhost:8081/games"); // Wstaw odpowiedni endpoint do pobrania wydarzeń z bazy danych
             const games = response.data;
 
             const filteredGames = games.filter(
-                (game) => (game.club1.id === 1 || game.club2.id === 1) && !game.played
+                (game) => (game.club1.id === user?.club.id || game.club2.id === user?.club.id) && !game.played
             );
 
             const events = filteredGames.map((game) => ({
