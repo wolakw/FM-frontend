@@ -45,6 +45,12 @@ export default function ClubPlayers() {
         setMessage("Player has been removed from the first XI.");
     };
 
+    const sellPlayer = async (playerId) => {
+        await axios.put(`http://localhost:8081/players/${playerId}/sell`);
+        loadClub();
+        setMessage("Player has been sold");
+    };
+
     if (!club) {
         return <div>Loading club data...</div>;
     }
@@ -134,6 +140,12 @@ export default function ClubPlayers() {
                                             onClick={() => movePlayerToXI(player.id)}
                                         >
                                             Move to XI
+                                        </button>
+                                        <button
+                                            className="btn btn-danger mx-2"
+                                            onClick={() => sellPlayer(player.id)}
+                                        >
+                                            Sell player
                                         </button>
                                     </td>
                                 </tr>
