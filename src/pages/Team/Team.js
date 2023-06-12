@@ -8,8 +8,8 @@ export default function ClubPlayers() {
     const [players, setPlayers] = useState([]);
     const [message, setMessage] = useState("");
 
-    const  id  = 1;
     const{user} = useAuth();
+    const  id  = user?.club.id;
 
     useEffect(() => {
         loadClub();
