@@ -35,7 +35,7 @@ export default function GameDetails() {
     };
 
     const isToday = (date) => {
-        const today = new Date();
+        const today = new Date("2023-06-15");
         const gameDate = new Date(date);
         return (
             today.getFullYear() === gameDate.getFullYear() &&

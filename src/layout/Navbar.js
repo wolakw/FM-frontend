@@ -38,7 +38,7 @@ function Navbar() {
                     <Link to='#' className='menu-bars'>
                         <FaIcons.FaBars onClick={showSidebar}/>
                     </Link>
-                    <h2 className="user-name">{user.club.name}</h2>
+                    <h2 className="user-name">{user.club?.name}</h2>
                     <Link style={{textDecoration: 'none'}} to="/" className="menu-bars2">
                         <h2>Football Manager</h2>
                     </Link>
