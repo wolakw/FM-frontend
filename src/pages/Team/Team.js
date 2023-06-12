@@ -11,7 +11,6 @@ export default function ClubPlayers() {
     const  id  = 1;
     const{user} = useAuth();
 
-
     useEffect(() => {
         loadClub();
     }, []);
@@ -55,9 +54,7 @@ export default function ClubPlayers() {
     };
 
     if (!club) {
-        return <div>Loading club data...
-            <h2>{user?.id}</h2>
-        </div>;
+        return <div>Loading club data...</div>;
     }
 
     return (
