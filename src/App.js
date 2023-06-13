@@ -22,7 +22,10 @@ import GamesClub from "./pages/game/GamesClub"
 import Game from "./pages/game/Game"
 import ViewGame from "./pages/game/ViewGame"
 import Schedule from "./pages/home/Schedule";
-
+import StartTraining from "./training/StartTraining";
+import IndividualTraining from "./training/IndividualTraining";
+import _IndividualTraining from "./training/_IndividualTraining";
+import TeamTraining from "./training/TeamTraining";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +58,11 @@ function App() {
                 <Route path="/games" element={<GamesClub />} />
                 <Route path="/game/:id" element={<Game />} />
                 <Route path="/viewgame/:id" element={<ViewGame />} />
+                <Route path="/start-training" element={<StartTraining />} />
+                <Route path="/individual-training" element={<IndividualTraining />} />
+                <Route path="/individual-training/:id" element={<_IndividualTraining />} />
+                <Route path="/team-training" element={<TeamTraining />} />
+
             </Route>
             <Route path="/" element={<GuestOutlet/>}>
             <Route path="/login" element={<Login />} />
