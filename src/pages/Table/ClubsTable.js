@@ -16,7 +16,6 @@ export default function Clubs() {
         const sortedClubs = result.data.sort((a, b) => b.points - a.points);
         setClubs(sortedClubs);
     };
-
     const simulate = async () => {
         await axios.put(`http://localhost:8081/games/simulate`);
         loadClubs();
