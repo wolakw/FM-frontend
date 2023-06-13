@@ -67,7 +67,7 @@ export default function ClubPlayers() {
                 <table className="table border shadow">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">#</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Speed</th>
@@ -83,7 +83,7 @@ export default function ClubPlayers() {
                         if (player.firstXI === true) {
                             return (
                                 <tr key={index}>
-                                    <td>{player.id}</td>
+                                    <td>{index + 1}</td>
                                     <td>{player.firstName}</td>
                                     <td>{player.lastName}</td>
                                     <td>{player.speed}</td>
