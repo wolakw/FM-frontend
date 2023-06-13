@@ -2,6 +2,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Button, Container, Paper} from "@mantine/core";
+import {useAuth} from "../../context/AuthContext";
 
 export function TeamTrainingList() {
 
@@ -9,7 +10,9 @@ export function TeamTrainingList() {
     const [players, setPlayers] = useState([]);
     const [message, setMessage] = useState("");
 
-    const  id  = 1;
+    const{user} = useAuth();
+    const  id  = user?.club.id;
+    const  uid  = user?.id;
 
     useEffect(() => {
         loadClub();

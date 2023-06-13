@@ -26,6 +26,9 @@ import StartTraining from "./training/StartTraining";
 import IndividualTraining from "./training/IndividualTraining";
 import _IndividualTraining from "./training/_IndividualTraining";
 import TeamTraining from "./training/TeamTraining";
+import Clubs from "./pages/clubs/Clubs";
+import ViewClub from "./pages/clubs/ViewClub";
+import EditClub from "./pages/clubs/EditClub";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +65,9 @@ function App() {
                 <Route path="/individual-training" element={<IndividualTraining />} />
                 <Route path="/individual-training/:id" element={<_IndividualTraining />} />
                 <Route path="/team-training" element={<TeamTraining />} />
+                <Route path="/clubs" element={<Clubs />} />
+                <Route path="/viewclub/:id" element={<ViewClub />} />
+                <Route path="/editclub/:id" element={<EditClub />} />
 
             </Route>
             <Route path="/" element={<GuestOutlet/>}>

@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {useAuth} from "../../context/AuthContext";
 
 export function IndividualTrainingList() {
 
@@ -8,7 +9,9 @@ export function IndividualTrainingList() {
     const [players, setPlayers] = useState([]);
     const [message, setMessage] = useState("");
 
-    const  id  = 1;
+    const{user} = useAuth();
+    const  id  = user?.club.id;
+    const  uid  = user?.id;
 
     useEffect(() => {
         loadClub();
