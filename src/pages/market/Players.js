@@ -32,6 +32,7 @@ export default function Players() {
             await axios.put(`http://localhost:8081/players/${Ids}/buy`);
             setBuyMessage("Player has been bought.");
             loadPlayers();
+            loadUser();
         } catch (error) {
             console.log(error);
             setBuyMessage("Not enough budget to buy this player.");
@@ -41,9 +42,26 @@ export default function Players() {
     const{user} = useAuth();
     const id = user?.id;
 
+    const [u, setUser] = useState({
+        name:"",
+        username:"",
+        email:"",
+        club:"",
+        currDate:""
+    })
+
+    useEffect(()=> {
+        loadUser();
+    }, [])
+
+    const loadUser = async ()=>{
+        const result = await  axios.get(`http://localhost:8081/user/${id}`);
+        setUser(result.data);
+    }
+
     return (
         <div className="container">
-            <h2>Transfer Market | Your budget {user?.club.budget?.toLocaleString()}$</h2>
+            <h2>Transfer Market | Your budget {u?.club.budget?.toLocaleString()}$</h2>
             <div className="py-4">
                 {buyMessage && <div className="alert alert-success">{buyMessage}</div>}
                 <table className="table border shadow">
