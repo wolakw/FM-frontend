@@ -28,8 +28,8 @@ export default function Games() {
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Your team</th>
-                        <th scope="col">Enemy team</th>
+                        <th scope="col">Team 1</th>
+                        <th scope="col">Team 2</th>
                         <th scope="col">Score</th>
                         <th scope="col">View</th>
                     </tr>
