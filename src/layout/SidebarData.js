@@ -17,6 +17,12 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
+        title: 'Training',
+        path: '/start-training',
+        icon: <IoIcons.IoMdPeople />,
+        cName: 'nav-text'
+    },
+    {
         title: 'Games',
         path: '/games',
         icon: <IoIcons.IoIosFootball/>,
@@ -39,5 +45,18 @@ export const SidebarData = [
         path: '/users',
         icon: <IoIcons.IoMdPeople />,
         cName: 'nav-text'
-    }
+    },
+    {
+        title: 'Clubs',
+        path: '/clubs',
+        icon: <IoIcons.IoMdPeople />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Misc',
+        path: '/misc',
+        icon: <IoIcons.IoMdPeople />,
+        cName: 'nav-text'
+    },
+
 ];
