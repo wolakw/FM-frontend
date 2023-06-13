@@ -34,12 +34,24 @@ function Navbar() {
                                 <AiIcons.AiOutlineClose/>
                             </Link>
                         </li>
-                        {(userData?.user?.authorities[0].authority==='ADMIN' && <li className={'nav-text'}>
-                        <Link to='/users' >
-                            <IoIcons.IoMdPeople />
-                            <span>Users</span>
-                        </Link>
-                    </li>)}
+                        {(userData?.user?.authorities[0].authority === 'ADMIN' && <li className={'nav-text'}>
+                            <Link to='/users'>
+                                <IoIcons.IoMdPeople/>
+                                <span>Users</span>
+                            </Link>
+                        </li>)}
+                        {(userData?.user?.authorities[0].authority === 'ADMIN' && <li className={'nav-text'}>
+                            <Link to='/clubs'>
+                                <IoIcons.IoMdPeople/>
+                                <span>Clubs</span>
+                            </Link>
+                        </li>)}
+                        {(userData?.user?.authorities[0].authority === 'ADMIN' && <li className={'nav-text'}>
+                            <Link to='/misc'>
+                                <IoIcons.IoMdPeople/>
+                                <span>Miscellaneous</span>
+                            </Link>
+                        </li>)}
                         {SidebarData.map((item, index) => {
                             return (
                                 <li key={index} className={item.cName}>

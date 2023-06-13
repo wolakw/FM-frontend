@@ -40,23 +40,9 @@ export const SidebarData = [
         icon: <FaIcons.FaCartPlus />,
         cName: 'nav-text'
     },
-
     {
         title: 'Log out',
         path: '/logout',
         cName: 'nav-text'
     },
-    {
-        title: 'Clubs',
-        path: '/clubs',
-        icon: <IoIcons.IoMdPeople />,
-        cName: 'nav-text'
-    },
-    {
-        title: 'Misc',
-        path: '/misc',
-        icon: <IoIcons.IoMdPeople />,
-        cName: 'nav-text'
-    },
-
 ];

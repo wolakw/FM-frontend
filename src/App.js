@@ -31,6 +31,9 @@ import ViewClub from "./pages/clubs/ViewClub";
 import EditClub from "./pages/clubs/EditClub";
 import {Misc} from "./Misc/Misc";
 import {AddPlayer} from "./Misc/AddPlayer";
+import {axiosConfig, setupAxios} from "./api/setupAxios";
+import Logout from "./pages/logout/Logout";
+import AdminOutlet from "./router/AdminRouting";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +43,7 @@ function App() {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        setupAxios(token);
         if (token) {
             me(token);
         }
@@ -50,7 +54,6 @@ function App() {
       {/*<Navbar />*/}
         <Routes>
             <Route path="/" element={<UserOutlet/>}>
-
                 <Route path="/" element={<Schedule />} />
                 <Route path="/add-user" element={<AddUser />} />
                 <Route path="/users" element={<Users />} />
@@ -67,12 +70,20 @@ function App() {
                 <Route path="/individual-training" element={<IndividualTraining />} />
                 <Route path="/individual-training/:id" element={<_IndividualTraining />} />
                 <Route path="/team-training" element={<TeamTraining />} />
+                <Route path="/logout" element={<Logout />} />
+            </Route>
+
+            <Route path="/" element={<AdminOutlet/>}>
+                <Route path="/" element={<Schedule />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/add-user" element={<AddUser />} />
+                <Route path="/edituser/:id" element={<EditUser />} />
+                <Route path="/viewuser/:id" element={<ViewUser />} />
                 <Route path="/clubs" element={<Clubs />} />
                 <Route path="/viewclub/:id" element={<ViewClub />} />
                 <Route path="/editclub/:id" element={<EditClub />} />
                 <Route path="/misc" element={<Misc />} />
                 <Route path="/add-player" element={<AddPlayer />} />
-
             </Route>
             <Route path="/" element={<GuestOutlet/>}>
             <Route path="/login" element={<Login />} />
