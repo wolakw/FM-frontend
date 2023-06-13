@@ -9,6 +9,14 @@ export const api={
             }
         })
     },
+    newPlayer:(data)=>{
+        const token = localStorage.getItem('token');
+        return axios.post("http://localhost:8081/add-player",data,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    },
     getMe:()=>{
         const token = localStorage.getItem('token');
         return axios.get("http://localhost:8081/api/v1/auth/me", {

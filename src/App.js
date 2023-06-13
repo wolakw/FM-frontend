@@ -29,6 +29,8 @@ import TeamTraining from "./training/TeamTraining";
 import Clubs from "./pages/clubs/Clubs";
 import ViewClub from "./pages/clubs/ViewClub";
 import EditClub from "./pages/clubs/EditClub";
+import {Misc} from "./Misc/Misc";
+import {AddPlayer} from "./Misc/AddPlayer";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +70,8 @@ function App() {
                 <Route path="/clubs" element={<Clubs />} />
                 <Route path="/viewclub/:id" element={<ViewClub />} />
                 <Route path="/editclub/:id" element={<EditClub />} />
+                <Route path="/misc" element={<Misc />} />
+                <Route path="/add-player" element={<AddPlayer />} />
 
             </Route>
             <Route path="/" element={<GuestOutlet/>}>
