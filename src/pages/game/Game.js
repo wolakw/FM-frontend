@@ -82,7 +82,7 @@ export default function GameDetails() {
             >
                 {game.played ? "Game Simulated" : "Simulate Game"}
             </button>
-            <Link to="/" className="btn btn-primary mt-3">
+            <Link to="/" className="btn btn-primary mx-3">
                 Back
             </Link>
         </div>
