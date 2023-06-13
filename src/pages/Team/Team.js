@@ -10,6 +10,7 @@ export default function ClubPlayers() {
 
     const{user} = useAuth();
     const  id  = user?.club.id;
+    const  uid  = user?.id;
 
     useEffect(() => {
         loadClub();
@@ -47,8 +48,8 @@ export default function ClubPlayers() {
         setMessage("Player has been removed from the first XI.");
     };
 
-    const sellPlayer = async (playerId) => {
-        await axios.put(`http://localhost:8081/players/${playerId}/sell`);
+    const sellPlayer = async (Ids) => {
+        await axios.put(`http://localhost:8081/players/${Ids}/sell`);
         loadClub();
         setMessage("Player has been sold");
     };
@@ -146,7 +147,7 @@ export default function ClubPlayers() {
                                         </button>
                                         <button
                                             className="btn btn-danger mx-2"
-                                            onClick={() => sellPlayer(player.id)}
+                                            onClick={() => sellPlayer([player.id, uid])}
                                         >
                                             Sell player
                                         </button>
