@@ -7,6 +7,7 @@ import './Navbar.css';
 import { IconContext } from 'react-icons';
 import axios from "axios";
 import {useAuth} from "../context/AuthContext";
+import * as IoIcons from "react-icons/io";
 
 function Navbar() {
     const [sidebar, setSidebar] = useState(false);
@@ -53,8 +54,9 @@ function Navbar() {
                             </Link>
                         </li>
                         {(userData?.user?.authorities[0].authority==='ADMIN' && <li className={'nav-text'}>
-                        <Link to='#' >
-                            <AiIcons.AiOutlineClose/>
+                        <Link to='/users' >
+                            <IoIcons.IoMdPeople />
+                            <span>Users</span>
                         </Link>
                     </li>)}
                         {SidebarData.map((item, index) => {

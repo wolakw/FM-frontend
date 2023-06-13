@@ -56,7 +56,7 @@ export default function ClubPlayers() {
 
     if (!club) {
         return <div>Loading club data...
-            <h2>{user?.id}</h2>
+            <h2>{user?.name&&user.name}</h2>
         </div>;
     }
 

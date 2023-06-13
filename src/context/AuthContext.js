@@ -1,5 +1,6 @@
 import React, {createContext, useState, useEffect, useContext} from "react";
 import {api} from "../api/ApiServices";
+import {axiosConfig, setupAxios} from "../api/setupAxios";
 
 export const UserContext = createContext({
     token: '',
@@ -25,6 +26,8 @@ export const UserProvider = ({children}) => {
                 const response = await api.getMe();
                 console.log(response);
                 setUser(response.data);
+                console.log(dataToken);
+
             } catch (error) {
                 console.error(error);
                 logout();
@@ -51,6 +54,9 @@ export const UserProvider = ({children}) => {
     const login = (token) => {
         setToken(token);
         saveTokenToLocalStorage(token);
+        me(token);
+        console.log(token);
+
     };
 
     const logout = () => {

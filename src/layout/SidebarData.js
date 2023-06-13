@@ -34,10 +34,10 @@ export const SidebarData = [
         icon: <FaIcons.FaCartPlus />,
         cName: 'nav-text'
     },
+
     {
-        title: 'Users',
-        path: '/users',
-        icon: <IoIcons.IoMdPeople />,
+        title: 'Log out',
+        path: '/logout',
         cName: 'nav-text'
     }
 ];

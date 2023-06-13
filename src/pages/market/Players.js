@@ -11,6 +11,7 @@ export default function Players() {
     }, []);
 
     const loadPlayers = async () => {
+        
         const result = await axios.get("http://localhost:8081/players");
         console.log(result.data);
         setPlayers(result.data);

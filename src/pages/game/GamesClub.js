@@ -17,6 +17,7 @@ export default function Games() {
             (game) => game.club1.id === 1 && game.played
         );
         setGames(filteredGames);
+
     };
 
     return (
