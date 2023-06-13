@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import "./Game.css"
 
 export default function ViewGame() {
     const [game, setGame] = useState(null);
@@ -27,23 +28,21 @@ export default function ViewGame() {
 
     return (
         <div className="container">
-            <h2>Match Details</h2>
             <div className="py-4">
-                <h4>Teams:</h4>
-                <p>Club 1: {game.club1.name}</p>
-                <p>Club 2: {game.club2.name}</p>
-                <p>Date: {game.gameDate?.substring(0, 10)}</p>
+                <h2>Match details</h2>
+                <h3>{game.club1.name} {game.goalsClub1} - {game.goalsClub2} {game.club2.name}</h3>
+                <h4>Date: {game.gameDate?.substring(0, 10)}</h4>
             </div>
             <div className="py-4">
-                <h4>Match Statistics:</h4>
-                <p>Goals Club 1: {game.goalsClub1}</p>
-                <p>Goals Club 2: {game.goalsClub2}</p>
-                <p>Shots Club 1: {game.shotsClub1}</p>
-                <p>Shots Club 2: {game.shotsClub2}</p>
-                <p>Possession Club 1: {game.possessionClub1}%</p>
-                <p>Possession Club 2: {game.possessionClub2}%</p>
-                <p>Passes Club 1: {game.passesClub1}</p>
-                <p>Passes Club 2: {game.passesClub2}</p>
+                <h2>Match Statistics:</h2>
+                <h4>Goals</h4>
+                <p>{game.club1.name} {game.goalsClub1} - {game.goalsClub2} {game.club2.name}</p>
+                <h4>Shots</h4>
+                <p>{game.club1.name} {game.shotsClub1} - {game.shotsClub2} {game.club2.name}</p>
+                <h4>Possession</h4>
+                <p>{game.club1.name} {game.possessionClub1}% - {game.possessionClub2}% {game.club2.name}</p>
+                <h4>Passes</h4>
+                <p>{game.club1.name} {game.passesClub1} - {game.passesClub2} {game.club2.name}</p>
             </div>
             {invalidDateAttempt && (
                 <div className="py-2 text-danger">
