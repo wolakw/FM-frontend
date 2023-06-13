@@ -19,7 +19,7 @@ export const SidebarData = [
     {
         title: 'Training',
         path: '/start-training',
-        icon: <IoIcons.IoMdPeople />,
+        icon: <FaIcons.FaRunning/>,
         cName: 'nav-text'
     },
     {
@@ -43,6 +43,7 @@ export const SidebarData = [
     {
         title: 'Log out',
         path: '/logout',
+        icon: <IoIcons.IoMdLogOut />,
         cName: 'nav-text'
     },
 ];

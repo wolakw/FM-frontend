@@ -7,7 +7,7 @@ import './Navbar.css';
 import { IconContext } from 'react-icons';
 import axios from "axios";
 import {useAuth} from "../context/AuthContext";
-import * as IoIcons from "react-icons/io";
+import * as RiIcons from 'react-icons/ri';
 
 function Navbar() {
     const [sidebar, setSidebar] = useState(false);
@@ -36,19 +36,19 @@ function Navbar() {
                         </li>
                         {(userData?.user?.authorities[0].authority === 'ADMIN' && <li className={'nav-text'}>
                             <Link to='/users'>
-                                <IoIcons.IoMdPeople/>
+                                <RiIcons.RiAdminLine/>
                                 <span>Users</span>
                             </Link>
                         </li>)}
                         {(userData?.user?.authorities[0].authority === 'ADMIN' && <li className={'nav-text'}>
                             <Link to='/clubs'>
-                                <IoIcons.IoMdPeople/>
+                                <RiIcons.RiAdminLine/>
                                 <span>Clubs</span>
                             </Link>
                         </li>)}
                         {(userData?.user?.authorities[0].authority === 'ADMIN' && <li className={'nav-text'}>
                             <Link to='/misc'>
-                                <IoIcons.IoMdPeople/>
+                                <RiIcons.RiAdminLine/>
                                 <span>Miscellaneous</span>
                             </Link>
                         </li>)}

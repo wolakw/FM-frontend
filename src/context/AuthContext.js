@@ -56,7 +56,7 @@ export const UserProvider = ({children}) => {
         saveTokenToLocalStorage(token);
         me(token);
         console.log(token);
-
+        window.location.reload(false);
     };
 
     const logout = () => {
