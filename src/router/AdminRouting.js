@@ -4,7 +4,7 @@ import {useAuth} from "../context/AuthContext";
 
 function AdminOutlet() {
     const {user} = useAuth();
-    return user.authorities[0].authority === "ADMIN" ? (<><Navbar/> <Outlet/></>) : <Navigate to="/login"/>;
+    return user?.authorities[0].authority === "ADMIN" ? (<><Navbar/> <Outlet/></>) : <Navigate to="/login"/>;
 }
 
 export default AdminOutlet;

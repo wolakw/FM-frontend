@@ -18,6 +18,7 @@ export default function Games() {
             (game) => (game.club1.id === user?.club?.id || game.club2.id === user?.club?.id) && game.played
         );
         setGames(filteredGames);
+
     };
 
     return (

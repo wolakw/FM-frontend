@@ -14,7 +14,7 @@ import {
 import { useForm } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../../../api/ApiServices";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export function RegisterForm() {
     const navigate  = useNavigate();
@@ -22,7 +22,8 @@ export function RegisterForm() {
         initialValues: {
             name: '',
             email: '',
-            password: ''
+            password: '',
+            clubName: ''
         }
     });
 
@@ -46,9 +47,11 @@ export function RegisterForm() {
             </Title>
             <Text color="dimmed" size="sm" align="center" mt={5}>
                 Already have an account?{' '}
+                <Link to={"/login"}>
                 <Anchor size="sm" component="button">
                     Sign in
                 </Anchor>
+                </Link>
             </Text>
 
             <Paper withBorder shadow="md" p={30} mt={30} radius="md">
@@ -56,11 +59,9 @@ export function RegisterForm() {
                     <TextInput {...form.getInputProps('name')} label="Name" placeholder="you@mantine.dev" required />
                     <TextInput {...form.getInputProps('email')} label="Email" placeholder="you@mantine.dev" required />
                     <PasswordInput {...form.getInputProps('password')} label="Password" placeholder="Your password" required mt="md" />
+                    <TextInput {...form.getInputProps('clubName')} label="Club name" placeholder="you@mantine.dev" required />
                     <Group position="apart" mt="lg">
-                        <Checkbox label="Remember me" />
-                        <Anchor component="button" size="sm">
-                            Forgot password?
-                        </Anchor>
+
                     </Group>
                     <Button loading={registerMutation.isLoading} type="submit" fullWidth mt="xl">
                         Register
