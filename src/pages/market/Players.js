@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import {useAuth} from "../../context/AuthContext";
 
 export default function Players() {
     const [players, setPlayers] = useState([]);
@@ -17,48 +18,32 @@ export default function Players() {
     };
 
     const handleBuy = (playerId) => {
-        const player = players.find((player) => player.id === playerId);
-        if (player.price > user.club.budget) {
+        const player = players.find((player) => player?.id === playerId);
+        if (player?.price > user?.club?.budget) {
             setBuyMessage("Not enough budget to buy this player.");
         } else {
             buyPlayer(playerId);
         }
     };
 
-    const buyPlayer = async (playerId) => {
+
+    const buyPlayer = async (Ids) => {
         try {
-            await axios.put(`http://localhost:8081/players/${playerId}/buy`);
+            await axios.put(`http://localhost:8081/players/${Ids}/buy`);
             setBuyMessage("Player has been bought.");
             loadPlayers();
-            loadUser();
         } catch (error) {
             console.log(error);
-            setBuyMessage("Failed to buy the player.");
+            setBuyMessage("Not enough budget to buy this player.");
         }
     };
 
-    const [user, setUser] = useState({
-        name:"",
-        username:"",
-        email:"",
-        club:"",
-        currDate:""
-    })
-
-    const id = 1;
-
-    useEffect(()=> {
-        loadUser();
-    }, [])
-
-    const loadUser = async ()=>{
-        const result = await  axios.get(`http://localhost:8081/user/${id}`);
-        setUser(result.data);
-    }
+    const{user} = useAuth();
+    const id = user?.id;
 
     return (
         <div className="container">
-            <h2>Transfer Market | Your budget {user.club.budget?.toLocaleString()}$</h2>
+            <h2>Transfer Market | Your budget {user?.club.budget?.toLocaleString()}$</h2>
             <div className="py-4">
                 {buyMessage && <div className="alert alert-success">{buyMessage}</div>}
                 <table className="table border shadow">
@@ -87,11 +72,11 @@ export default function Players() {
                                     <td>{player.shooting}</td>
                                     <td>{player.defending}</td>
                                     <td>{player.passing}</td>
-                                    <td>{player.price.toLocaleString()}$</td>
+                                    <td>{player?.price?.toLocaleString()}$</td>
                                     <td>
                                         <button
                                             className="btn btn-primary mx-2"
-                                            onClick={() => handleBuy(player.id)}
+                                            onClick={() => handleBuy([player.id, id])}
                                         >
                                             Buy
                                         </button>

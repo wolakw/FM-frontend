@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import {useAuth} from "../../context/AuthContext";
 
 export default function GameDetails() {
     const [game, setGame] = useState(null);
     const [invalidDateAttempt, setInvalidDateAttempt] = useState(false); // Dodana zmienna invalidDateAttempt
     const { id } = useParams(); // Pobranie ID meczu z parametrów URL
+
+    const{user} = useAuth();
 
     useEffect(() => {
         loadGame();
@@ -35,7 +38,7 @@ export default function GameDetails() {
     };
 
     const isToday = (date) => {
-        const today = new Date("2023-06-15");
+        const today = new Date(user?.currDate);
         const gameDate = new Date(date);
         return (
             today.getFullYear() === gameDate.getFullYear() &&
