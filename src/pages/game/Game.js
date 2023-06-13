@@ -24,10 +24,11 @@ export default function GameDetails() {
     };
 
     const simulateGame = async () => {
-        if (!game.played && isToday(game.gameDate)) {
+        if (!game.played && game.gameDate === user?.currDate) {
             // Sprawdzenie czy gra jeszcze nie została zasymulowana i czy data jest dzisiejsza
             try {
                 await axios.put(`http://localhost:8081/game/${id}/simulate`);
+                await axios.put(`http://localhost:8081/user/${user?.id}/setdate`);
                 loadGame();
             } catch (error) {
                 console.error("Error simulating game:", error);

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import {useAuth} from "../../context/AuthContext";
 
 export default function Games() {
     const [games, setGames] = useState([]);
 
-    const { id } = useParams();
+    const{user} = useAuth();
 
     useEffect(() => {
         loadGames();
@@ -14,7 +15,7 @@ export default function Games() {
     const loadGames = async () => {
         const result = await axios.get("http://localhost:8081/games");
         const filteredGames = result.data.filter(
-            (game) => game.club1.id === 1 && game.played
+            (game) => (game.club1.id === user?.club?.id || game.club2.id === user?.club?.id) && game.played
         );
         setGames(filteredGames);
     };
