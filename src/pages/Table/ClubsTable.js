@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 export default function Clubs() {
     const [clubs, setClubs] = useState([]);
 
-    const { id } = useParams();
+    const {id} = useParams();
 
     useEffect(() => {
         loadClubs();
@@ -15,6 +15,12 @@ export default function Clubs() {
         const result = await axios.get("http://localhost:8081/clubs");
         const sortedClubs = result.data.sort((a, b) => b.points - a.points);
         setClubs(sortedClubs);
+    };
+
+    const simulate = async () => {
+        await axios.put(`http://localhost:8081/games/simulate`);
+        loadClubs();
+        window.location.reload(false);
     };
 
     return (
@@ -47,6 +53,7 @@ export default function Clubs() {
                     ))}
                     </tbody>
                 </table>
+                <button className="btn btn-primary mx-2" onClick={simulate}>Simulate rest of the season</button>
             </div>
         </div>
     );

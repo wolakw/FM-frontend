@@ -55,6 +55,7 @@ export default function Schedule() {
 
     function handleEventClick(event) {
         navigate(`/game/${event.id}`); // Przekierowanie do widoku symulacji meczu z odpowiednim ID meczu
+        window.location.reload(false);
     }
 
     return (
